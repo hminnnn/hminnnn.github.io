@@ -1,0 +1,135 @@
+.nav {
+	background-image: url("Grey-Jean-White-Seamless-Patterns-For-Website-Backgrounds.jpg");
+}
+
+img {
+	position: absolute;
+	left: 20px;
+	width: 140px;
+	height: 80px;
+}
+
+.nav li {
+	display: inline;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.nav ul {
+	padding-right: 10px;
+	padding-top: 20px;
+}
+
+.nav a:link {
+	font-family: "Brubeck AH";
+	font-size: 24px;
+	color: black;
+	text-decoration: none;
+}
+
+.nav a:visited {
+	text-decoration: none;
+	font-style: normal;
+	color: black;
+}
+
+.nav a:hover {
+	color: orange;
+	text-decoration: none;
+}
+
+.nav a:active {
+	color: orange;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.middle {
+	background-image: url("Grey-Jean-White-Seamless-Patterns-For-Website-Backgrounds.jpg");
+}
+
+.middle .container {
+	padding: 10px;
+	height: 700px;
+	bottom: 30px;
+
+	background-image: url("bgpic.jpg");
+	border-radius: 25px;
+	background-size: 1200px 800px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.middle h1 {
+	color: black;
+	font-family: "Good Foot", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin-right: 100px;
+	font-size: 50px;
+	float: right;
+	color: #CFCFCF;
+}
+
+.parts {
+	padding: 15px;
+	padding-top: 40px;
+	height: 430px;
+	background-image: url("Grey-Jean-White-Seamless-Patterns-For-Website-Backgrounds.jpg");
+}
+
+.parts .container {
+	background-image: url("white-background.jpg");
+	border-radius: 25px;
+}
+.parts .col-sm-4 h3 {
+	font-family: "Brubeck AH";
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.parts a:link {
+	font-family: "Brubeck AH";
+	color: black;
+	text-decoration: none;
+}
+
+.parts a:visited {
+	text-decoration: none;
+	font-style: normal;
+	color: black;
+}
+
+.parts a:hover {
+	color: #FFA375;
+	text-decoration: none;
+}
+
+.parts a:active {
+	color: orange;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+
+.parts p {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 16px;
+	position: relative;
+	padding: 20px;
+}
+
+.parts .col-sm-4 img {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px; /*safari chrome*/
+	-moz-border-radius: 150px; /*firefox*/
+	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
+
+}
+
+.parts .col-sm-4 img:hover {
+	opacity: 0.9;
+	background-color: #E6FFFF;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
