@@ -30,19 +30,15 @@ ul.timeline > li:before {
     z-index: 400;
 }
 
-
 .round-image-wrapper {
     border-radius: 50%;
     width: 350px;
     height: 350px;
     overflow: hidden;
-        /*height: 100%;*/
     margin-left: auto;
     margin-right: auto;
 }
 
 .profile-pic {
-  /*display: inline;*/
-  height: 100%;
-  /*width: auto;*/
+     height: 100%;
 }
