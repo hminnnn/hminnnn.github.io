@@ -382,3 +382,18 @@ a:focus, a:hover, a:active {
   background-color: #1a252f;
   border-color: #1a252f;
 }
+
+
+/** Hm addedd **/
+.round-image-wrapper {
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-pic {
+     height: 100%;
+}
