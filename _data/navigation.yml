@@ -1,0 +1,6 @@
+- name: Home
+  link: /
+- name: TIL
+  link: /til.html
+- name: The Past 
+  link: /blog.html

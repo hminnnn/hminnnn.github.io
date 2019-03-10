@@ -1,0 +1,152 @@
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, p {
+     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+ .site-content {
+     min-height: 60vh;
+     padding-top: 1.5rem;
+     margin-top: 57px;
+     transition: all 0.4s;
+     padding-bottom: 75px;
+}
+
+/** for posts **/
+
+.section-title h2 {
+     border-bottom:1px solid rgba(0,0,0,.125);
+     margin-bottom:25px;
+     font-weight:700;
+     font-size:1.4rem;
+     margin-bottom:27px;
+}
+ .section-title span {
+     border-bottom:1px solid rgba(0,0,0,.44);
+     display:inline-block;
+     padding-bottom:20px;
+     margin-bottom:-1px;
+}
+
+.maxthumb {
+     max-height:300px;
+     overflow:hidden;
+}
+
+.listrecent h2.card-title {
+     font-size:1.3rem;
+     font-weight:700;
+     line-height: 1.25;
+}
+.listrecent h4.card-text {
+     color:rgba(0,0,0,.44);
+     font-size:0.95rem;
+     line-height:1.4;
+     font-weight:400;
+}
+
+
+.card .card-footer .bg-white{
+     background-colour: #fff!important;
+}
+
+.card .card-footer {
+      border: 0;
+}
+
+ .wrapfooter {
+     font-size:12px;
+     float: right;
+}
+
+ .author-meta {
+     flex:1 1 auto;
+     white-space:nowrap!important;
+     text-overflow:ellipsis!important;
+     overflow:hidden!important;
+}
+ span.post-name,span.post-date,span.author-meta {
+     display:inline-block;
+}
+ span.post-date,span.post-read {
+     color:rgba(0,0,0,.44);
+}
+
+
+/** navigation **/
+ .mediumnavigation {
+     background:rgba(255,255,255,.97);
+     box-shadow:0 2px 2px -2px rgba(0,0,0,.15);
+     transition: top 0.2s ease-in-out;
+}
+
+.mediumnavigation .form-control {
+     font-size:0.8rem;
+     border-radius:30px;
+     overflow:hidden;
+     border:1px solid rgba(0,0,0,0.04);
+     min-width: 180px;
+}
+ .mediumnavigation .form-inline {
+     margin-left:15px;
+}
+ .mediumnavigation .form-inline .btn {
+     margin-left:-50px;
+     border:0;
+     border-radius:30px;
+     cursor:pointer;
+}
+ .mediumnavigation .form-inline .btn:hover,.mediumnavigation .form-inline .btn:active {
+     background:transparent;
+     color:green;
+}
+ .mediumnavigation .navbar-brand {
+     font-weight:500;
+}
+ .mediumnavigation .dropdown-menu {
+     border:1px solid rgba(0,0,0,0.08);
+     margin:.5rem 0 0;
+}
+ .mediumnavigation .nav-item,.dropdown-menu {
+     font-size:0.9rem;
+}
+ .mediumnavigation .search-icon {
+     margin-left:-40px;
+     display:inline-block;
+     margin-top:3px;
+     cursor:pointer;
+}
+ .mediumnavigation .navbar-brand img {
+     max-height:30px;
+     margin-right:5px;
+}
+
+ @media (min-width:992px) {
+     .navbar-expand-lg .navbar-nav .nav-link {
+         padding-right:0.8rem;
+         padding-left:0.8rem;
+    }
+}
+
+
+/** header **/
+
+ .mainheading h1.sitetitle {
+     font-family:Righteous;
+}
+h1.posttitle {
+     font-weight:700;
+     margin-bottom:1rem;
+}
+
+.insidepost h4.post {
+    border-bottom:1px solid rgba(0,0,0,.44);
+     font-size:0.95rem;
+     line-height:1.4;
+     font-weight:400;
+}
+
+/** nav bar **/
+
+.nav-item .active>.nav-link {
+    color: rgba(0,0,0,.9);
+}
