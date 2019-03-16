@@ -1,6 +1,6 @@
 ---
 layout: post
-author: hm
+author: HM
 ---
 
 How does the robot vacuum go back to dock on its own!?

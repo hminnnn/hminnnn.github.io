@@ -1,6 +1,6 @@
 ---
 layout: post
-author: hm
+author: HM
 ---
 
 To keep a web page out of Google, use noindex. 

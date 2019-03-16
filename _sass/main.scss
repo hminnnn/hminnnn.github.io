@@ -150,3 +150,16 @@ h1.posttitle {
 .nav-item .active>.nav-link {
     color: rgba(0,0,0,.9);
 }
+
+
+/** Inside post styling **/
+
+img[src*='#center'] { 
+    display: block;
+    margin: auto;
+}
+
+img + em { 
+    display: block; 
+	text-align: center;
+}
