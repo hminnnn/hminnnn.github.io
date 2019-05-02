@@ -135,3 +135,9 @@ img[src*='#center'] {
 img + em {
   display: block;
   text-align: center; }
+
+blockquote {
+  color: #666;
+  margin: 0;
+  padding-left: 3em;
+  border-left: 0.5em #eee solid; }
