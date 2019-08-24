@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Deploying mean stack app on google app engine </title>
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <script src="/assets/js/jquery.min.js"></script>
+
+  <!-- Highlight -->
+  <link rel="stylesheet" href="/assets/highlight/styles/vs2015.css">
+  <script src="/assets/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+</head>
+<body>
+
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    
+    <div class="container pr-0">    
+    
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+    <img src="/" alt="">
+    </a>
+    <!-- End Logo -->
+  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+       
+        <!-- Begin Menu -->
+        
+            <ul class="navbar-nav ml-auto">
+                
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/til">TIL</a>
+                </li>
+
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/blog.html">Blog</a>
+                </li>
+                
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/">Portfolio</a>
+                </li>
+              
+
+                
+            </ul>   
+        
+        
+  
+        <!-- End Menu -->
+
+    </div>
+        
+    </div>
+</nav>
+
+  
+
+
+ <div class="site-content">
+
+  <div class="container">
+
+
+   <div class="mainheading">
+    <h1> hmin
+    </h1>
+    <p class="lead">On some days, I wonder.</p>
+
+  </div> 
+  <div class="row listrecent">
+	<div class="col-lg-2 col-md-1 col-sm-1"> </div>
+
+	<div class="col-lg-8 col-md-10 col-sm-10 insidepost">
+		<h1 class="posttitle">
+		Deploying mean stack app on google app engine 
+		</h1>
+
+		<h4 class="post"><p>Was trying out MEAN stack and so here’s my BlogshopsCombined web app! It’s damn basic and far from complete but I just want it to be up and running lol.</p>
+
+<h3 id="angular">Angular:</h3>
+
+<p>Idk why it was so difficult to get my Angular proj up on Google App Engine!?! I tried following the interactive tutorial for nodejs but that didn’t work as I was getting these errors.</p>
+
+<blockquote>
+  <p>Error: Not Found<br />
+The requested URL /projects was not found on this server.</p>
+</blockquote>
+
+<p>and</p>
+<blockquote>
+  <p>Syntax Error in Angular App: Unexpected token &lt;</p>
+</blockquote>
+
+<p>Then I kinda blindly changed the app.yaml file according to whatever answers I found online but still…
+ I followed <a href="https://anupampawar.com/2018/11/03/deploying-angular-5-app-on-google-app-engine/">this</a> in the end, uploading my /dist folder and app.yaml to the bucket instead of cloning my entire project from github.</p>
+
+<p>My app.yaml:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">runtime</span><span class="pi">:</span> <span class="s">python27</span>
+<span class="na">api_version</span><span class="pi">:</span> <span class="s">1</span>
+<span class="na">threadsafe</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">handlers</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">/</span>
+  <span class="na">static_files</span><span class="pi">:</span> <span class="s">dist/blogshop-app/index.html</span>
+  <span class="na">upload</span><span class="pi">:</span> <span class="s">dist/blogshop-app/index.html</span>
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">/</span>
+  <span class="na">static_dir</span><span class="pi">:</span> <span class="s">dist/blogshop-app</span>
+</code></pre></div></div>
+
+<p>I still don’t know why the runtime is python27 instead of nodejs :/</p>
+
+<p>Generated the /dist folder with</p>
+<blockquote>
+  <p>ng build –prod</p>
+</blockquote>
+
+<p>On Google Cloud Platform, go to Storage and select my project. Upload /dist folder and app.yaml into the bucket.</p>
+
+<p>In the browser cloud shell, make a new directory</p>
+
+<blockquote>
+  <p>mkdir blogshop-app-gpc</p>
+</blockquote>
+
+<p>Sync the data from the bucket to the directory just created</p>
+
+<blockquote>
+  <p>gsutil rsync -r (insert here the <strong>Link for gsutil</strong> from the Overview tab) ./blogshop-app-gpc</p>
+</blockquote>
+
+<p>When it’s done, cd into blogshop-app-gpc and run the deploy command gcloud app deploy. YAY IT’S DONE :’)</p>
+
+<hr />
+
+<p>Oh I was getting 404 when I refresh my page. Everything works fine on first load until I refreshed the page. Googled and it seems like I have to make some server side configurations…? I decided to cheat and remove my routes since all I had was one page. Will probably have to get this fixed if I ever have multiple pages.</p>
+
+<hr />
+
+<h3 id="express">Express:</h3>
+
+<p>Deploying Express on Google App Engine was way easier. I followed this https://github.com/motdotla/dotenv for my mongoose db credentials uri.</p>
+
+<p>My app.yaml:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">runtime</span><span class="pi">:</span> <span class="s">nodejs</span>
+</code></pre></div></div>
+
+<p>My package.json start script:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel-watch server.js"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node server.js"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Uploaded my files the same way as I did above and it’z done!</p>
+
+<hr />
+
+<p>Oh and I didn’t know the import line that I had always been using is a ES6 syntax…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">mongoose</span> <span class="k">from</span> <span class="s1">'mongoose'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>I was shoook by this error when I ran “node server.js” for the first time</p>
+
+<blockquote>
+  <p>SyntaxError: Unexpected token import.</p>
+</blockquote>
+
+<p>It was working in dev because of babel and
+<a href="https://www.freecodecamp.org/news/how-to-enable-es6-and-beyond-syntax-with-node-and-express-68d3e11fe1ab/">Babel is modern JavaScript transpiler. A transpiler means your modern JavaScript code will be transformed to an older format that Node.js can understand</a></p>
+
+<p>so I changed my imports to require instead of enabling the imports…</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'mongoose'</span><span class="p">);</span>
+</code></pre></div></div>
+<hr />
+
+<h3 id="mongodb">MongoDB:</h3>
+
+<p>Got my database on MongoDB Atlas.</p>
+
+<p>My data comes from parsing the blogshops using scrapy.</p>
+
+<h3 id="scrapy">Scrapy:</h3>
+
+<p><a href="https://medium.com/better-programming/develop-your-first-web-crawler-in-python-scrapy-6b2ee4baf954">https://medium.com/better-programming/develop-your-first-web-crawler-in-python-scrapy-6b2ee4baf954</a><br />
+<a href="https://www.datacamp.com/community/tutorials/making-web-crawlers-scrapy-python">https://www.datacamp.com/community/tutorials/making-web-crawlers-scrapy-python</a><br />
+<a href="https://alysivji.github.io/mongodb-pipelines-in-scrapy.html">https://alysivji.github.io/mongodb-pipelines-in-scrapy.html</a><br />
+<a href="https://docs.mongodb.com/manual/reference/method/db.collection.update/">https://docs.mongodb.com/manual/reference/method/db.collection.update/</a><br />
+<a href="https://mongoosejs.com/docs/connections.html">https://mongoosejs.com/docs/connections.html</a></p>
+
+</h4>
+		<div class="wrapfooter">
+		<span class="post-date">25 Aug 2019 - HM</span>
+		</div>
+	</div>
+
+	<div class="col-lg-2 col-md-1 col-sm-1"> </div>
+</div>
+
+
+</div>
+</div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script> 
+<script src="/assets/js/mediumish.js"></script>
+
+
+
+</html>
