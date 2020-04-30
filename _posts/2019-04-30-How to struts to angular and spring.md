@@ -3,7 +3,7 @@ layout: post
 author: HM
 ---
 
-*Some notes on what I've been doing because one day I'll forget them all. I wanna title this __HM BRIEFLY EXPLAINS CONVERTING STRUTS 1.x TO ANGULAR & SPRING MVC__*
+*Some notes on what I've been doing because one day I'll forget. This shall be called __HM BRIEFLY EXPLAINS CONVERTING STRUTS 1.x TO ANGULAR & SPRING MVC__*
 
 
 Inside the WEB-INF folder there will be a 
@@ -153,7 +153,7 @@ as you will pass the object from frontend (angular) to backend (java). This allo
 ---
 
 
-### 5. Link up angular side to spring controllers
+### 5. Link up angular service to spring controllers
 
 To send/retrieve ApplicationEnquiryForm to/from the backend, send HTTP GET/POST request. Some sniplets that I hope are useful:
 
