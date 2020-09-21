@@ -5,7 +5,7 @@ author: HM
 
    
 
-Was trying out MEAN stack and so here's my BlogshopsCombined web app! It's damn basic and far from complete but I just want it to be up and running lol.
+Was trying out MEAN stack and so here's my BlogshopsCombined web app! It's damn basic and far from complete but I just want it to be up and running..
 
 ### Angular: ###
 
@@ -17,7 +17,7 @@ The requested URL /projects was not found on this server.
 and 
 > Syntax Error in Angular App: Unexpected token < 
 
-Then I kinda blindly changed the app.yaml file according to whatever answers I found online but still...
+Then I blindly changed the app.yaml file according to whatever answers I found online but still...
  I followed [this](https://anupampawar.com/2018/11/03/deploying-angular-5-app-on-google-app-engine/) in the end, uploading my /dist folder and app.yaml to the bucket instead of cloning my entire project from github.
 
 
@@ -35,7 +35,7 @@ handlers:
   static_dir: dist/blogshop-app
 ```
 
-I still don't know why the runtime is python27 instead of nodejs :/
+I still don't know why the runtime is python27 instead of nodejs? :/
 
 Generated the /dist folder with  
 > ng build –prod
@@ -54,7 +54,7 @@ When it's done, cd into blogshop-app-gpc and run the deploy command gcloud app d
 
 ---
 
-Oh I was getting 404 when I refresh my page. Everything works fine on first load until I refreshed the page. Googled and it seems like I have to make some server side configurations...? I decided to cheat and remove my routes since all I had was one page. Will probably have to get this fixed if I ever have multiple pages. 
+I was getting 404 when I refresh my page. Everything works fine on first load until I refreshed the page. Googled and it seems like I have to make some server side configurations...? I decided to cheat and remove my routes since all I had was one page. Will probably have to get this fixed if I ever have multiple pages. 
 
 ---
 

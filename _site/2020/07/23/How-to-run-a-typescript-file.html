@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>It's darkness at the north pole for 6 months</title>
+  <title>How to run a typescript file</title>
 
   <link rel="stylesheet" href="/assets/css/styles.css">
 
@@ -92,27 +92,52 @@
 
 	<div class="col-lg-8 col-md-10 col-sm-10 insidepost">
 		<h1 class="posttitle">
-		It's darkness at the north pole for 6 months
+		How to run a typescript file
 		</h1>
 
-		<h4 class="post"><p>The North Pole experience almost 6 months of darkness and then almost 6 months of brightness!!</p>
+		<h4 class="post"><p><em>Does my question sound stupid?</em></p>
 
-<p>When the Northern Hemisphere is experiencing summer with longer daylight, the North Pole is in constant daylight and similarly the South Pole will be in constant darkness. This is because of the 23.5 degrees tilt of the Earth as it orbits around the sun.</p>
+<p>I’ve been working with React and Angular in Typescript for awhile. One day when trying out a HackerRank question, I realize I didn’t know how to run my code if I wanted to do it in Typescript. I only knew how to run the entire project… :’)</p>
 
-<p><img src="https://qph.fs.quoracdn.net/main-qimg-988a1c2d654d867d7202f42a3a03ca9a.webp#center" alt="North Pole darkness 6 months" />
-<em>Photo from <a href="https://www.quora.com/Why-do-the-poles-experience-6-months-of-continuous-days-and-nights">Quora</a></em></p>
+<p>Turns out it’s actually pretty simple.</p>
 
-<p>Is the North or South Pole colder?</p>
+<p>Create a helloworld.ts file with a simple line</p>
+<blockquote>
+  <p>console.log(“helloworld”)</p>
+</blockquote>
 
-<p>“North! Because polar bears have more fur than penguins” - M<br />
-“Can I not be your friend anymore” - J</p>
+<p>Create a default package.json file</p>
+<blockquote>
+  <p>npm init</p>
+</blockquote>
 
-<p>The South is colder! South has more land and is higher above the sea level. Antarctica is the highest continent. North sits on ice surrounded by waters and water warms the air.</p>
+<p>Install typescript</p>
+<blockquote>
+  <p>npm install typescript</p>
+</blockquote>
 
-<p>Penguins are native to the South. Polar Bears live in the North. So I googled to find that they have never met 😅</p>
+<p>Install ts-node</p>
+<blockquote>
+  <p>npm install ts-node</p>
+</blockquote>
+
+<p>Create a default tsconfig.json</p>
+<blockquote>
+  <p>npx tsc –init</p>
+</blockquote>
+
+<p>To run:</p>
+<blockquote>
+  <p>npx ts-node helloworld.ts</p>
+</blockquote>
+
+<p>To generate the .js file – the typescript compiler transpiles the Typescript code to Javascript</p>
+<blockquote>
+  <p>npx tsc helloworld.ts</p>
+</blockquote>
 </h4>
 		<div class="wrapfooter">
-		<span class="post-date">12 Mar 2019 - HM</span>
+		<span class="post-date">23 Jul 2020 - HM</span>
 		</div>
 	</div>
 

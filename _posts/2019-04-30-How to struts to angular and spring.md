@@ -3,7 +3,7 @@ layout: post
 author: HM
 ---
 
-*Some notes on what I've been doing because one day I'll forget. This shall be called __HM BRIEFLY EXPLAINS CONVERTING STRUTS 1.x TO ANGULAR & SPRING MVC__*
+*Some notes on what I've been doing because one day I'll forget*
 
 
 Inside the WEB-INF folder there will be a 
@@ -292,7 +292,4 @@ ReqAuthFilter extends AbstractPreAuthenticatedProcessingFilter
 CustomAuthenticationProvider implements AuthenticationProvider  
 
 
----
-
-*Glad to have been through this all. From not knowing a single thing about struts & angular to being able to help others with it.*
 

@@ -1,0 +1,397 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>How to struts to angular and spring</title>
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <script src="/assets/js/jquery.min.js"></script>
+
+  <!-- Highlight -->
+  <link rel="stylesheet" href="/assets/highlight/styles/vs2015.css">
+  <script src="/assets/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+</head>
+<body>
+
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    
+    <div class="container pr-0">    
+    
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+    <img src="/" alt="">
+    </a>
+    <!-- End Logo -->
+  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+       
+        <!-- Begin Menu -->
+        
+            <ul class="navbar-nav ml-auto">
+                
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/til">TIL</a>
+                </li>
+
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/blog.html">Blog</a>
+                </li>
+                
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/">Portfolio</a>
+                </li>
+              
+
+                
+            </ul>   
+        
+        
+  
+        <!-- End Menu -->
+
+    </div>
+        
+    </div>
+</nav>
+
+  
+
+
+ <div class="site-content">
+
+  <div class="container">
+
+
+   <div class="mainheading">
+    <h1> hmin
+    </h1>
+    <p class="lead">On some days, I wonder.</p>
+
+  </div> 
+  <div class="row listrecent">
+	<div class="col-lg-2 col-md-1 col-sm-1"> </div>
+
+	<div class="col-lg-8 col-md-10 col-sm-10 insidepost">
+		<h1 class="posttitle">
+		How to struts to angular and spring
+		</h1>
+
+		<h4 class="post"><p><em>Some notes on what I’ve been doing because one day I’ll forget</em></p>
+
+<p>Inside the WEB-INF folder there will be a</p>
+<ol>
+  <li><strong>struts-config</strong> folder with various <strong>struts-config.xml</strong>. containing the action mapping and form beans</li>
+  <li><strong>command-config</strong> folder with various <strong>command-config.xml</strong> containing command class methods that are called by the action</li>
+  <li><strong>tiles-def</strong> folder with various <strong>tiles-def.xml</strong> containing the mapping of forward path to jsp file</li>
+  <li><strong>pfw</strong> is the db sql stuff.</li>
+</ol>
+
+<p>If you don’t already know the application that is in struts, start by mapping out the page flow of the application. Find the first page of the application (.jsp or .do).</p>
+
+<p><em>I suggest opening the project in sublime or whatever that lets you “go to definition”</em></p>
+
+<p>E.g. if my main page has 2 options, one to enquire an application and one to submit an application, there will be 2 flows that i will map out separately. 
+You just want to see what classes and methods are being used.</p>
+
+<h3 id="1-find-and-map-out-the-flow-of-your-application">1. Find and map out the flow of your application</h3>
+
+<p>E.g. the first page of the application main menu (mainmenu.jsp) has a few links, one to enquire an application.</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">'</span><span class="nt">&lt;session:constant </span><span class="na">name=</span><span class="s">"ContextPath"</span><span class="nt">/&gt;</span><span class="s">/enquireAnApplication.do'</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Find this enquireAnApplication.do action in the struts-config.xml. Find /enquireAnApplication.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">"/enquireAnApplication"</span>
+	<span class="na">name=</span><span class="s">"ApplicationEnquiryForm"</span>
+	<span class="na">type=</span><span class="s">"com.xxx.action.LoadApplicationForm"</span>
+	<span class="na">parameter=</span><span class="s">"forwardSuccess=true"</span>			
+	<span class="na">scope=</span><span class="s">"request"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;forward</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">path=</span><span class="s">".xxx.xxx.enquire.appln"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;forward</span> <span class="na">name=</span><span class="s">"failure"</span> <span class="na">path=</span><span class="s">".xxx.xxx.invalidAccessError"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/action&gt;</span>		
+</code></pre></div></div>
+<blockquote>
+  <p>type=”com.xxx.action.LoadApplicationForm”</p>
+</blockquote>
+
+<p><strong>LoadApplicationForm.java</strong> is an action class inside the folder structure com.xxx.action. The methods inside will be executed. Or you can right click on the name and you can “Go to definition” which will open the class for you.</p>
+
+<blockquote>
+  <p>/enquireAnApplication</p>
+</blockquote>
+
+<p>Look for this string inside the corresponding <strong>command-config.xml</strong> file. E.g. if the action falls in struts-config-enquiry.xml then the command should fall in command-config-enquiry.xml. Or you can right click on the name and you can “Go to definition” which will open the class for you.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;command</span> <span class="na">name=</span><span class="s">"/enquireAnApplication"</span>
+	<span class="na">type=</span><span class="s">"com.xx.command.EnquiryCommand"</span>
+	<span class="na">service=</span><span class="s">"getApplicationEnquiry"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/command&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>type=”com.xx.command.EnquiryCommand”</p>
+</blockquote>
+
+<p><strong>EnquiryCommand.java</strong> will be inside the folder structure com.xx.command. The method name <strong>getApplicationEnquiry</strong> will be executed.</p>
+
+<p>Not all /xxx.do have a corresponding command to be executed. If the action /xxx can’t be found in the command-config.xml, it means that there is only the action, no command method.</p>
+
+<blockquote>
+  <p>forward path=”.xxx.xxx.enquire.appln”</p>
+</blockquote>
+
+<p>This is the path to search for in the corresponding <strong>tiles-def</strong> file to find out which .jsp file it will route to upon success/failure.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">".xxx.xxx.enquire.appln"</span> <span class="na">extends=</span><span class="s">".xxx.xxx"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;put</span> <span class="na">name=</span><span class="s">"main"</span> <span class="na">value=</span><span class="s">"/jsp/EnquireApp.jsp"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/definition&gt;</span>
+</code></pre></div></div>
+
+<p><strong>EnquireApp.jsp</strong> is the next page you will route to.</p>
+
+<p>Open the .jsp page, see what it does, find the .do method that it calls, repeat from the top to find and map all the classes and methods that are being called as the application go from page to page :)</p>
+
+<hr />
+<h3 id="2-recreate-the-application-flow-on-angular">2. Recreate the application flow on angular</h3>
+
+<p>Create a new project on angular: https://angular.io/guide/quickstart</p>
+
+<p>Go through the tutorial if you don’t know angular yet.</p>
+
+<p>For each application flow, I usually create:</p>
+<ul>
+  <li>a module</li>
+  <li>a component for each page</li>
+  <li>a routing module</li>
+  <li>a service</li>
+</ul>
+
+<p>then import all these into the main app.module.ts and app-routing.module.</p>
+
+<p>Briefly do up/link up all the pages so that it looks like the original application (without all the logic behind, just routerlink page to page by clicking a button)</p>
+
+<hr />
+<h3 id="3-create-new-maven-project">3. Create new maven project</h3>
+
+<p>web.xml<br />
+MyDispatcherServlet extends DispatcherServlet<br />
+Custom Filter implements Filter<br />
+MyServlet extends HttpServlet</p>
+
+<p>servlet-context.xml<br />
+<code class="highlighter-rouge">xml &lt;context:component-scan base-package="whereyourrestcontrollersare" /&gt;</code></p>
+
+<hr />
+<h3 id="4-create-new-form-objects-to-replace-form-beans">4. Create new form objects to replace form-beans</h3>
+
+<p>Original form on struts-config.xml:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form-bean</span> <span class="na">name=</span><span class="s">"ApplicationEnquiryForm"</span> <span class="na">type=</span><span class="s">"org.apache.struts.validator.DynaValidatorActionForm"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">"applStatus"</span> <span class="na">type=</span><span class="s">"java.lang.String"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">"periodFrom"</span> <span class="na">type=</span><span class="s">"java.lang.String"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">"periodTo"</span> <span class="na">type=</span><span class="s">"java.lang.String"</span> <span class="nt">/&gt;</span>
+    ...
+    ...
+
+</code></pre></div></div>
+
+<p>Create a new object on angular</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">ApplicationEnquiryForm</span> <span class="p">{</span>
+
+    <span class="kr">public</span> <span class="nx">applStatus</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">periodFrom</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">periodTo</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="p">...</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<p>and similar on Java side</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ApplicationEnquiryForm</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">applStatus</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">periodFrom</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">periodTo</span><span class="o">;</span>
+    <span class="o">...</span>
+    <span class="o">...</span>
+    <span class="n">with</span> <span class="n">their</span> <span class="n">getters</span> <span class="n">and</span> <span class="n">setters</span>
+</code></pre></div></div>
+
+<p>as you will pass the object from frontend (angular) to backend (java). This allows the object to auto map the fields inside (I think)</p>
+
+<hr />
+
+<h3 id="5-link-up-angular-service-to-spring-controllers">5. Link up angular service to spring controllers</h3>
+
+<p>To send/retrieve ApplicationEnquiryForm to/from the backend, send HTTP GET/POST request. Some sniplets that I hope are useful:</p>
+
+<p>EnquireApplication.component.ts:</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getApplicationEnquiryForm</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">enquireApplication</span><span class="p">.</span><span class="nx">getApplicationEnquiryForm</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">returnedForm</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">applicationEnquiryForm</span> <span class="o">=</span> <span class="nx">returnedForm</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>EnquireApplication.service.ts:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">getApplicationEnquiryForm</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'/getApplicationEnquiryForm'</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">restclientService</span><span class="p">.</span><span class="nx">getrawjson</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">postApplicationEnquiryForm</span><span class="p">(</span><span class="nx">applicationEnquiryForm</span><span class="p">:</span> <span class="nx">ApplicationEnquiryForm</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'/postApplicationEnquiryForm'</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">restclientService</span><span class="p">.</span><span class="nx">postjson</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">applicationEnquiryForm</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>ApplicationEnquiryController.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EnquirePrintController</span> <span class="o">{</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/getApplicationEnquiryForm"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">ApplicationEnquiryForm</span> <span class="nf">getApplicationEnquiryForm</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">ApplicationEnquiryForm</span> <span class="n">applicationEnquiryForm</span> <span class="o">=</span> <span class="o">(</span><span class="n">ApplicationEnquiryForm</span><span class="o">)</span> <span class="n">request</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"APPLICATIONENQUIRYFORM"</span><span class="o">);</span>
+
+        
+    <span class="k">return</span> <span class="n">applicationEnquiryForm</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="o">...</span>
+    <span class="o">...</span>
+
+</code></pre></div></div>
+
+<p>My common shared restclientservice looks something like this:</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@</span><span class="nd">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">RestclientService</span> <span class="p">{</span>
+
+  <span class="nx">headerDict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">,</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">,</span>
+    <span class="s1">'Access-Control-Allow-Headers'</span><span class="p">:</span> <span class="s1">'Content-Type'</span><span class="p">,</span>
+  <span class="p">}</span>
+
+  <span class="nx">headerObj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">headerDict</span><span class="p">),</span>
+  <span class="p">};</span>
+
+  <span class="nx">preUrl</span> <span class="o">=</span> <span class="s2">"/app"</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span><span class="p">:</span> <span class="nx">Http</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="nx">getrawjson</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">preUrl</span> <span class="o">+</span> <span class="nx">url</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">toPromise</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+  <span class="p">}</span>
+  
+  <span class="nx">postjson</span><span class="p">(</span><span class="na">url</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="na">rawdata</span><span class="p">:</span> <span class="nx">any</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">rawdata</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">preUrl</span> <span class="o">+</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">headerObj</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">toPromise</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span> <span class="k">as</span> <span class="nx">any</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="p">...</span>
+  <span class="p">...</span>
+
+</code></pre></div></div>
+
+<p>If you can send your form object back and retrieve the fields then yay.</p>
+
+<hr />
+
+<h3 id="6-convert-all-your-jsp-pages-to-html-and-ts">6. Convert all your .jsp pages to .html and .ts</h3>
+<p>Bring over all validations/javascript parts to typescript.</p>
+
+<p>Convert jsp tags to angular example:</p>
+<ul>
+  <li>c:choose c:when c:otherwise to ng-container *ngIf else etc.</li>
+</ul>
+
+<hr />
+
+<h3 id="7-do-up-backend-flow-with-the-action-and-command-methods-used">7. Do up backend flow with the action and command methods used</h3>
+
+<p>Following the flow mapped out,</p>
+
+<p>Create a new class e.g. ApplicationEnquiryCommand.java to contain all the logic (from struts action &amp; command) to be processed for that Enquiry flow.</p>
+
+<p>Take out all the methods being called in the action and command for each page and throw them in there. Then call the methods accordingly from your REST Controller to process the forms.</p>
+
+<p>For struts <strong>action</strong> classes:
+If session is used, change session to the new form object created. Some action classes don’t do much, they only put objects into the session/Icontext etc. You don’t need to do that anymore as you are filling up our form object on the page itself.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/postApplicationEnquiryForm"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">ApplicationEnquiryForm</span> <span class="nf">submitApplicationEnquiryForm</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">ApplicationEnquiryForm</span> <span class="n">applicationEnquiryForm</span><span class="o">,</span> <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+
+     <span class="n">ApplicationEnquiryCommand</span> <span class="n">applicationEnquiryCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ApplicationEnquiryCommand</span><span class="o">();</span>
+    <span class="n">applicationEnquiryCommand</span><span class="o">.</span><span class="na">getApplicationEnquiryList</span><span class="o">(</span><span class="n">applicationEnquiryForm</span><span class="o">);</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="8-spring-security-stuff">8. Spring security stuff</h3>
+
+<p>What I did for own application login:</p>
+
+<p>Security.xml<br />
+BasicAuthConfiguration.java<br />
+CustomAuthenticationProvider.java  <br />
+Authentication in request header at angular side.<br />
+@RequestMapping(“/login”) at LoginController.java</p>
+
+<p>For login from somewhere else and redirected to your application:</p>
+
+<p>CustomAuthenticationEntryPoint implements AuthenticationEntryPoint<br />
+ReqAuthFilter extends AbstractPreAuthenticatedProcessingFilter<br />
+CustomAuthenticationProvider implements AuthenticationProvider</p>
+
+</h4>
+		<div class="wrapfooter">
+		<span class="post-date">30 Apr 2019 - HM</span>
+		</div>
+	</div>
+
+	<div class="col-lg-2 col-md-1 col-sm-1"> </div>
+</div>
+
+
+</div>
+</div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script> 
+<script src="/assets/js/mediumish.js"></script>
+
+
+
+</html>
