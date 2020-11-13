@@ -2,15 +2,16 @@
 layout: post
 author: HM
 ---
-It's my first time trying out docker!
 
+It's my first time trying out docker! For nodejs and react 
 
-## Writing a dockerfile 
-#### For a nodejs backend server 
+## Writing a dockerfile
+
+#### For a nodejs backend server
 
 ```
-FROM node:12.18  
-WORKDIR /usr/src/app  
+FROM node:12.18
+WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
 COPY . .
@@ -38,11 +39,11 @@ tsc command outputs to a build folder as configured in my tsconfig.json: "outDir
 
 `node server.js` is how to run the web server
 
-Pretty much similar to the nodejs docker tutorial  
+Pretty much similar to the nodejs docker tutorial
 
-#### For a react frontend server ####
+#### For a react frontend server
 
-``` 
+```
 FROM node:12.18
 WORKDIR /usr/src/app
 COPY package.json ./
@@ -50,11 +51,11 @@ COPY yarn.lock ./
 RUN yarn install
 COPY . .
 RUN yarn build
- 
+
 # remove unused folders
 RUN rm -rf node_modules
 RUN rm -rf src
- 
+
 EXPOSE 3000
 CMD ["npx", "serve", "-s" ,"build", "-l" ,"3000"]
 ```
@@ -69,14 +70,11 @@ To serve the application on a static server, create-react-app says to run serve 
 -l is to specify the port.
 npx is so that I don’t have to do yarn global add serve. It allows you to execute packages that are not installed!
 
-I'm running this on a static server because it is not hosted on a platform.  
+I'm running this on a static server because it is not hosted on a platform.
 
 ---
 
-  
-
-
-## Writing a docker-compose file ##
+## Writing a docker-compose file
 
 docker compose makes it simple to run your docker services (that 2 docker files i wrote above)
 
@@ -86,9 +84,9 @@ services:
   backend:
     build: ./server
     image: "local/myapp-server:latest"
-    ports: 
+    ports:
     - "5000:5000"
-    environment: 
+    environment:
     - NODE_ENV=docker
   db:
     image: "mongo"
@@ -97,7 +95,7 @@ services:
   frontend:
     build: ./myapp
     image: "local/myapp-app:latest"
-    ports: 
+    ports:
     - "3000:3000"
 ```
 
@@ -109,73 +107,89 @@ These are the names of my services. Can be named however you need.
 
 I think this points to the directory where my Dockerfile is.
 
-`environment:` 
+`environment:`
 
-Environment variables can be set here! I tried setting it from the CMD command in the Dockerfile but it didn’t work out for me.
+Environment variables can be set here
 
 `image: "mongo"`
 
 I’m using mongodb for my database. 27017 is the default port.
 
-#### My folder structure ####
+
+
+---
+
+## Run docker-compose
+
+Builds all the services
+
+> docker-compose build
+
+Build only the frontend service
+
+> docker-compose build frontend
+
+Builds, (re)creates, starts, and attaches to containers for a service.
+
+> docker-compose up
+
+To specify only the frontend service
+
+> docker-compose up frontend
+
+Stops containers and removes containers, networks, volumes, and images created by up
+
+> docker-compose down
+
+
+---
+
+## Run docker
+
+Commands for my reference :>
+
+Build docker image
+
+> docker build -tag [name] .
+
+Create docker container and run it
+
+> docker run [image name]
+
+View all docker images
+
+> docker images
+
+Delete a docker image
+
+> docker rmi [image name or number]
+
+View all docker containers
+
+> docker container ls -a
+
+View active docker containers
+
+> docker container or docker ps
+
+Delete docker container
+
+> docker container rm [container]
+
+---
+
+## My folder structure
+
 ```
 testapp
 |
 +-- docker-compose.yml
 |
 +-- server
-|  |  
+|  |
 |  +-- Dockerfile
-|    
+|
 +-- myapp
-|  |  
+|  |
 |  +-- Dockerfile
 ```
----
-## Run docker-compose ##
-
-> docker-compose build
-
-This builds all the services
-
-> docker-compose build frontend
-
-This will build only the frontend service
-
-> docker-compose up
-
-Builds, (re)creates, starts, and attaches to containers for a service.
-
-> docker-compose up frontend
-
-To specify only the frontend service.
-
-> docker-compose down
-
-Stops containers and removes containers, networks, volumes, and images created by up
-
----
-## Run docker ##
-
-Commands for my reference :> 
-
-Build docker image
-> docker build -tag [name] .
-
-Create docker container and run it
-> docker run [image name]
-
-View all docker images
-> docker images
-
-Delete a docker image
-> docker rmi [image name or number]
-
-View all docker containers
-> docker container ls -a
-
-View active docker containers
-> docker container or docker ps
-
-Delete docker container
-> docker container rmi [container]

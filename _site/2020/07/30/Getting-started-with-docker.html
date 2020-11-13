@@ -47,12 +47,12 @@
                 </li>
 
 
-                
+                <!-- 
                 <li class="nav-item">
                 
                 <a class="nav-link" href="/blog.html">Blog</a>
                 </li>
-                
+                 -->
 
                 
                 <li class="nav-item">
@@ -95,13 +95,14 @@
 		Getting started with docker
 		</h1>
 
-		<h4 class="post"><p>It’s my first time trying out docker!</p>
+		<h4 class="post"><p>It’s my first time trying out docker! For nodejs and react</p>
 
 <h2 id="writing-a-dockerfile">Writing a dockerfile</h2>
+
 <h4 id="for-a-nodejs-backend-server">For a nodejs backend server</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM node:12.18  
-WORKDIR /usr/src/app  
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM node:12.18
+WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
 COPY . .
@@ -140,11 +141,11 @@ COPY yarn.lock ./
 RUN yarn install
 COPY . .
 RUN yarn build
- 
+
 # remove unused folders
 RUN rm -rf node_modules
 RUN rm -rf src
- 
+
 EXPOSE 3000
 CMD ["npx", "serve", "-s" ,"build", "-l" ,"3000"]
 </code></pre></div></div>
@@ -172,9 +173,9 @@ services:
   backend:
     build: ./server
     image: "local/myapp-server:latest"
-    ports: 
+    ports:
     - "5000:5000"
-    environment: 
+    environment:
     - NODE_ENV=docker
   db:
     image: "mongo"
@@ -183,7 +184,7 @@ services:
   frontend:
     build: ./myapp
     image: "local/myapp-app:latest"
-    ports: 
+    ports:
     - "3000:3000"
 </code></pre></div></div>
 
@@ -197,97 +198,110 @@ services:
 
 <p><code class="highlighter-rouge">environment:</code></p>
 
-<p>Environment variables can be set here! I tried setting it from the CMD command in the Dockerfile but it didn’t work out for me.</p>
+<p>Environment variables can be set here</p>
 
 <p><code class="highlighter-rouge">image: "mongo"</code></p>
 
 <p>I’m using mongodb for my database. 27017 is the default port.</p>
 
-<h4 id="my-folder-structure">My folder structure</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>testapp
-|
-+-- docker-compose.yml
-|
-+-- server
-|  |  
-|  +-- Dockerfile
-|    
-+-- myapp
-|  |  
-|  +-- Dockerfile
-</code></pre></div></div>
 <hr />
+
 <h2 id="run-docker-compose">Run docker-compose</h2>
+
+<p>Builds all the services</p>
 
 <blockquote>
   <p>docker-compose build</p>
 </blockquote>
 
-<p>This builds all the services</p>
+<p>Build only the frontend service</p>
 
 <blockquote>
   <p>docker-compose build frontend</p>
 </blockquote>
 
-<p>This will build only the frontend service</p>
+<p>Builds, (re)creates, starts, and attaches to containers for a service.</p>
 
 <blockquote>
   <p>docker-compose up</p>
 </blockquote>
 
-<p>Builds, (re)creates, starts, and attaches to containers for a service.</p>
+<p>To specify only the frontend service</p>
 
 <blockquote>
   <p>docker-compose up frontend</p>
 </blockquote>
 
-<p>To specify only the frontend service.</p>
+<p>Stops containers and removes containers, networks, volumes, and images created by up</p>
 
 <blockquote>
   <p>docker-compose down</p>
 </blockquote>
 
-<p>Stops containers and removes containers, networks, volumes, and images created by up</p>
-
 <hr />
+
 <h2 id="run-docker">Run docker</h2>
 
 <p>Commands for my reference :&gt;</p>
 
 <p>Build docker image</p>
+
 <blockquote>
   <p>docker build -tag [name] .</p>
 </blockquote>
 
 <p>Create docker container and run it</p>
+
 <blockquote>
   <p>docker run [image name]</p>
 </blockquote>
 
 <p>View all docker images</p>
+
 <blockquote>
   <p>docker images</p>
 </blockquote>
 
 <p>Delete a docker image</p>
+
 <blockquote>
   <p>docker rmi [image name or number]</p>
 </blockquote>
 
 <p>View all docker containers</p>
+
 <blockquote>
   <p>docker container ls -a</p>
 </blockquote>
 
 <p>View active docker containers</p>
+
 <blockquote>
   <p>docker container or docker ps</p>
 </blockquote>
 
 <p>Delete docker container</p>
+
 <blockquote>
-  <p>docker container rmi [container]</p>
+  <p>docker container rm [container]</p>
 </blockquote>
+
+<hr />
+
+<h2 id="my-folder-structure">My folder structure</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>testapp
+|
++-- docker-compose.yml
+|
++-- server
+|  |
+|  +-- Dockerfile
+|
++-- myapp
+|  |
+|  +-- Dockerfile
+</code></pre></div></div>
 </h4>
 		<div class="wrapfooter">
 		<span class="post-date">30 Jul 2020 - HM</span>
